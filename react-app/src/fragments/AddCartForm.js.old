@@ -1,0 +1,188 @@
+//The following snippet is based on Week 4 Ex. 4 Course Material COSC2410 semester 1, 2024.
+
+/*
+    Refactoring to new DB API
+*/
+import React, { useState, useEffect } from "react";
+import PostDataService from "../services/PostService";
+import { getUserID, getUser, getReviews, getUsername } from "../data/data";
+//TODO: make user review star system
+//TODO: make user edit and delete functionality for reviews
+function AddCartForm({ addItem, product }) {
+    //const activeUserID = getUserID(getUser());
+    const handleSubmit = (event) => { //handle adding an item to the cart
+        event.preventDefault(); //prevent default submit 
+        addItem(product.product_name); //add the item to the cart state array in ShoppingCart.js
+    };
+
+    const [activeUserID, setActiveUserID] = useState();
+
+    //console.log(activeUserID);
+    const [displayReviews, setDisplayReviews] = useState(false);
+    const [field, setField] = useState("");
+    const [posts, setPosts] = useState();
+    const [username, setUsername] = useState("");
+
+
+    const fetchUserName = async(userID)=>{
+        try{
+            const name = await getUsername(userID);
+            console.log('username', name);
+            setUsername(name);
+        }catch (error){
+            console.error("error fetching username", error);
+        }
+    }
+    fetchUserName();
+
+    useEffect(()=>{
+        const fetchUserID = async ()=>{
+            try{
+                const userID = await getUserID(getUser());
+                setActiveUserID(userID);
+                console.log("userID::",userID);
+            }
+            catch(error){
+                console.error("Error fetching activeUserID:", error);
+            }
+        };
+
+        fetchUserID();
+    },[])
+
+
+    useEffect(()=>{
+        const getPosts = async ()=>{
+            const posts = await getReviews(product.product_id);
+            setPosts(posts);
+        }
+
+        getPosts();
+    },[])
+
+    //TODO userID returns an unfulfilled promise when inside this function.
+    // outputting it outside the function returns the intended userID.
+    //I'm not sure why this happens.
+
+    const handleReviewSubmit = async (event) => {
+        event.preventDefault();
+        try{
+            const product_id = product.product_id;
+            //const userID = await activeUserID;
+            console.log("userid",activeUserID);
+            const initialReviewState =
+            {
+                userID: activeUserID,
+                product_id: product_id,
+                text: field
+            };
+            console.log(initialReviewState);
+
+            PostDataService.create(initialReviewState);
+
+        }catch(error){
+            console.error("error fetching activeUserID:",error);
+        }
+
+        return;
+
+        //PostDataService.create
+    }
+
+    //debugging
+    /*useEffect(()=>{
+        console.log(field);
+    },[field]);*/
+                                        /*
+                                        <div className="review-item">
+                                            <div className="review-item-left">
+                                                Name
+                                            </div>
+
+                                            <div className="review-item-right">
+                                                Lorum ipsum dolor sit amet
+                                            </div>*/
+    return (
+        <div className="produce-item">
+            <div>
+                <button>Test</button>
+            </div>
+            <form onSubmit={handleSubmit}>
+                {/*<input value={item} onChange={(event) => setItem(event.target.value)}/>*/}
+                <div className="produce-item-flex">
+                    <div className="produce-item-info">
+                        <div className="produce-item-info-left">
+                            {product.special_bool === true ? 
+                                <p>{product.product_name}: $
+                                    <span className="line-through">{product.price} </span> 
+                                    <span>  | $
+                                        { /* Convoluted line of actions to round price to nearest 0.05 */
+                                            (Math.round((product.price - (product.price * product.specials.discount).toFixed(2)) * 20) / 20).toFixed(2)
+                                        }
+                                    </span>
+                                </p> :
+                                <p>
+                                    {product.product_name}: ${product.price}
+                                </p> 
+                            }
+                            {product.special_bool && <p className="produce-special"> On Special today! {product.specials.discount * 100}% Off</p>}
+                            <p>{product.info}</p>
+                        </div>
+                        <div className="produce-item-info-right">
+                            {<img src={ require(`../images/products/browse${product.product_id}.jpg`)} alt={product.product_name} className="product-img-cart"/>}
+                        </div>
+                    </div>
+                
+                        <div className="produce-button-submit">
+                            <button>Add Item to Cart</button>
+                        </div>
+                </div>
+                        
+            </form>
+                        <div>
+                            {displayReviews &&
+                            
+                            <div className="reviews-body">
+                                
+                                <button onClick={()=>{setDisplayReviews(false)}}>Close</button>
+
+                                <div className="reviews-flex">
+                                    <div className="reviews-top">
+                                        {<img className="reviews-image" src={ require(`../images/products/browse${product.product_id}.jpg`)}></img>}
+                                        {product.product_name}: ${product.price}
+                                    </div>
+
+                                    <div className="reviews-bottom">
+                                        <form onSubmit={handleReviewSubmit}>
+                                            <div className="reviews-textbox">
+                                                <textarea type="text" onChange={(event)=>{setField(event.target.value)}}rows="3" cols="50" value={field}></textarea>
+                                            </div>
+                                            <button type="submit">Submit</button>
+                                        </form>
+                                            {posts.map(async(post)=>{
+                                                let content;
+                                                let name;
+                                                name = <p>{fetchUserName(post.userID)}</p>
+                                                content = <p>{post.text}</p>
+
+                                                return(
+                                                    <div className = "review-item" key={post.text}>
+                                                        {name}
+                                                        {content}
+                                                    </div>
+                                                )
+                                            })}
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+            <div className="review-button">
+                <button onClick={()=>{setDisplayReviews(true)}}>Reviews</button>
+            </div>
+        
+        </div>
+    );
+};
+
+export default AddCartForm;

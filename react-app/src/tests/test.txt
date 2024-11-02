@@ -1,0 +1,11 @@
+Located within this directory are Unit Tests designed in order to verify the functionality of our system
+
+In order to test the Shopping-Cart feature, we have the following files containing Unit tests for the cart:
+    CartItem.test.js 
+    CartViewForm.test.js 
+    CreditForm.test.js 
+
+Futhermore in order to test the functionality of the review system,w we have created the file
+    ReviewItem.test.js
+
+These test files contain several Unit tests that validate both their indvidual functionality and formatting.
