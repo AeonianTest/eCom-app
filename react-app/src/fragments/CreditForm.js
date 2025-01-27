@@ -59,7 +59,7 @@ function dateCheck(EXPdate) { //use this for checking current year date for stuf
     // console.log("yyyy is", yyyy);
     // console.log("mm is", mm);
 
-    if (yyyy === parseInt(EXPdate.slice(-4)) && mm <= parseInt(EXPdate.substring(0, 2))) { //if same year, and current real month <= given month
+    if (yyyy <= parseInt(EXPdate.slice(-4)) && mm <= parseInt(EXPdate.substring(0, 2))) { //if good year, and current real month <= given month
         //console.log("correct month");
         return true; //return true, real month
     }

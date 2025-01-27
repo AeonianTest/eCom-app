@@ -131,8 +131,8 @@ test("CreditForm Success handling", () => {
     fireEvent.change(cardNumberField, { target: { value: "4916 2198 1264 9839" } }); //Enter good card number
     expect(cardNumberField.value).toBe("4916 2198 1264 9839"); // validate that the field has been changed
 
-    fireEvent.change(dateField, { target: { value: "09/2024"} }); //Enter good month
-    expect(dateField.value).toBe("09/2024");
+    fireEvent.change(dateField, { target: { value: "02/2026"} }); //Enter good month
+    expect(dateField.value).toBe("02/2026");
 
     fireEvent.click(paymentSubmitButton); //This simulates entering/submitting the form
     expect(mockedNav).toHaveBeenCalledWith("/shoppingresults"); //Expect that we have called the navigate function to move in browser
