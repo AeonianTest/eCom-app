@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 function Navbar(props) {
     return (
             <div className="nav-area">
-                <Link className="nav-icon-link" to="/"><img className = "nav-icon" src={require("../logo.png")}/></Link>
+                <Link className="nav-icon-link" to="/">
+                    <img className = "nav-icon" alt="Website icon" src={require("../logo.png")}/>
+                </Link>
 
                 {props.username !== null &&
                     <>

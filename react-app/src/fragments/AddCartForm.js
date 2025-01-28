@@ -265,7 +265,11 @@ function AddCartForm({ addItem, product }) {
 
                                 <div className="reviews-flex">
                                     <div className="reviews-top">
-                                        {<img className="reviews-image" src={ require(`../images/products/browse${product.product_id}.jpg`)}></img>}
+                                        {<img 
+                                          className="reviews-image" 
+                                          src={ require(`../images/products/browse${product.product_id}.jpg`)}
+                                          alt={product.product_name} 
+                                        />}
                                         {product.product_name}: ${product.price}
                                     </div>
 

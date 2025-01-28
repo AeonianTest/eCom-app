@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState /*, useEffect*/ } from 'react';
 
 function ErrorMessage({ message }) {
 
   //most of the logic from this box works with the state. all it does is conditionally render itself onto the top
   // of the page
-  const [visible, setVisible] = useState(true);
+  const [visible/*, setVisible*/] = useState(true);
 
 
   //commenting out the close button functionality for now because it's buggy and I can't figure it out -dan

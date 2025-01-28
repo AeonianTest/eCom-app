@@ -242,7 +242,7 @@ function Profile(props){
                 {viewState && (
                     <div>
                         <div className="profile-top">
-                        <img className="profile-pfp" src={require("../userimg.png")}></img>
+                        <img className="profile-pfp" alt="generic pfp" src={require("../userimg.png")}></img>
                             <div id="datejoined">
                                 <span className="profile-name">{userData ? userData.username : <span>Loading...</span>}</span>
                                 <h3>Date Joined: {userData ? userData.date_joined : <span>Loading...</span>}</h3>
@@ -262,7 +262,7 @@ function Profile(props){
                     <div>
                         <div className="profile-top">
                         
-                         <img className="profile-pfp" src={require("../userimg.png")}></img> {/*User icon from https://icons8.com/*/}
+                         <img className="profile-pfp" alt="generic pfp" src={require("../userimg.png")}></img> {/*User icon from https://icons8.com/*/}
                             <div id="datejoined">
                                 <span className="profile-name">{userData ? userData.username : <span>Loading...</span>}</span>
                                 <h3>Date Joined: {userData ? userData.date_joined : <span>Loading...</span>}</h3>
