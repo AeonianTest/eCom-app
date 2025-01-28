@@ -3,7 +3,7 @@
 /*
     Refactoring to new DB API
 */
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import ErrorMessage from "./ErrorMessage";
 import PostDataService from "../services/PostService";
 import { getUserID, getUser, getReviews, getUsername } from "../data/data";

@@ -1,5 +1,4 @@
 import React from "react";
-import homebg from "../homebg.mp4";
 import { Link } from "react-router-dom";
 
 //Homepage video sourced from Pexels under Pexels free content license. https://www.pexels.com/license/ 

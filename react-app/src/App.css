@@ -100,7 +100,7 @@ body{
 /*Navbar css start*/
 
 .success-box{
-  display: box;
+  display: flex;
   z-index: 1000;
   background-color: rgb(92, 255, 165);
   border: solid 4px rgb(9, 255, 0);
@@ -118,7 +118,7 @@ body{
 }
 
 .error-box{
-  display: box;
+  display: flex;
   z-index: 1000;
   background-color: rgb(255, 92, 92);
   border: solid 4px rgb(255, 0, 0);
